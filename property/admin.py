@@ -23,5 +23,6 @@ class FaltAdmin(admin.ModelAdmin):
 
     list_editable =[
         'new_building',
+        
     ]
 admin.site.register(Flat, FaltAdmin)
