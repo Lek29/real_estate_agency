@@ -9,10 +9,12 @@ class FaltAdmin(admin.ModelAdmin):
         'owner',
     ]
 
+
     readonly_fields = [
         'created_at',
         ]
-    
+
+
     list_display = [
         'town',
         'address',
@@ -21,8 +23,15 @@ class FaltAdmin(admin.ModelAdmin):
         'construction_year',
     ]
 
-    list_editable =[
+
+    list_editable = [
         'new_building',
         
+    ]
+
+    list_filter = [
+        'new_building',
+        'rooms_number',
+        'has_balcony',
     ]
 admin.site.register(Flat, FaltAdmin)
