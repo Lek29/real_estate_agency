@@ -30,12 +30,14 @@ class FaltAdmin(admin.ModelAdmin):
         
     ]
 
+
     list_filter = [
         'new_building',
         'rooms_number',
         'has_balcony',
     ]
 
+    raw_id_fields = ['likes']
 
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat'] 
