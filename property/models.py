@@ -105,13 +105,14 @@ class Complaint(models.Model):
         verbose_name_plural = 'Жалобы'
 
 class Owner(models.Model):
-    name = models.CharField('ФИО владельца', max_length=200)
+    name = models.CharField('ФИО владельца', max_length=200, db_index=True)
     phonenumbers = models.CharField('Номер владельца', max_length=20)
     pure_phone = models.CharField(
                             'Нормализованный номер владельца',
                             max_length=20,
                             blank=True,
                             null=True,
+                            db_index=True,
     )
     flat = models.ManyToManyField(
                             'Flat',
