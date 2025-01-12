@@ -75,7 +75,11 @@ class Flat(models.Model):
         blank=True,
     )
     def __str__(self):
-        return f'{self.town}, {self.address} ({self.price}р.)'
+        return f'{self.town}, {self.address} ({self.price}.)'
+    
+    class Meta():
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
     
 
 class Complaint(models.Model):
@@ -115,6 +119,8 @@ class Owner(models.Model):
                             verbose_name='Квартиры в собственности',
     )
 
-
+    class Meta():
+        verbose_name = 'Владелец'
+        verbose_name_plural = 'Владельцы'
 
     
