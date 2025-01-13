@@ -2,12 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib import admin
 
 
 User = get_user_model()
 
 class Flat(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200)
+    # owner = models.CharField('ФИО владельца', max_length=200)
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     owner_pure_phone = PhoneNumberField(
         'Нормализованный номер владельца',
@@ -74,6 +75,13 @@ class Flat(models.Model):
         verbose_name='Кто лайкнул',
         blank=True,
     )
+
+    owners = models.ManyToManyField(
+        'Owner',
+        related_name='flats',
+        verbose_name='Собственники',
+        blank=True,
+    )
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}.)'
     
@@ -116,12 +124,22 @@ class Owner(models.Model):
     )
     flat = models.ManyToManyField(
                             'Flat',
-                            related_name='owners',
+                            related_name='owned_by',
                             verbose_name='Квартиры в собственности',
+                            blank=True,
     )
 
+    def __str__(self):
+        return self.name
     class Meta():
         verbose_name = 'Владелец'
         verbose_name_plural = 'Владельцы'
+
+
+class OwnerInline(admin.TabularInline):
+    model = Owner.flat.through
+    extra = 1
+    verbose_name = 'Собственник'
+    verbose_name_plural = 'Собственники'
 
     

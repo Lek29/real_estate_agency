@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Flat
 from .models import Complaint
 from .models import Owner
+from .models import OwnerInline
 
 
 class FaltAdmin(admin.ModelAdmin):
@@ -39,13 +40,16 @@ class FaltAdmin(admin.ModelAdmin):
         'has_balcony',
     ]
 
-    raw_id_fields = ['likes']
+    raw_id_fields = ['likes', 'owners']
+
+    inlines = [OwnerInline]
 
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat'] 
     list_display = ['user', 'flat', 'text']  
     list_filter = ['flat']  
     search_fields = ['user__username', 'text'] 
+
 
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat']
