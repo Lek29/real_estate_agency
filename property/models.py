@@ -77,7 +77,7 @@ class Flat(models.Model):
 
     owners = models.ManyToManyField(
         'Owner',
-        related_name='flats',
+        related_name='owned_flats',
         verbose_name='Собственники',
         blank=True,
     )
@@ -93,12 +93,14 @@ class Complaint(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Кто жаловался:'
+        verbose_name='Кто жаловался:',
+        related_name='user_complaints',
     )
     flat = models.ForeignKey(
         Flat,
         on_delete=models.CASCADE,
-        verbose_name='Квартира, на которую пожаловались'
+        verbose_name='Квартира, на которую пожаловались',
+        related_name='flat_complaints',
     )
     text = models.TextField(
         verbose_name='Текст жалобы'
