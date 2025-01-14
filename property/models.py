@@ -8,13 +8,13 @@ from django.contrib import admin
 User = get_user_model()
 
 class Flat(models.Model):
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
-    owner_pure_phone = PhoneNumberField(
-        'Нормализованный номер владельца',
-        blank=True,
-        null=True,
-        region='RU',
-    )
+    # owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    # owner_pure_phone = PhoneNumberField(
+    #     'Нормализованный номер владельца',
+    #     blank=True,
+    #     null=True,
+    #     region='RU',
+    # )
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
