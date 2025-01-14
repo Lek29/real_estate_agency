@@ -133,16 +133,11 @@ class Owner(models.Model):
     def __str__(self):
         return self.name
     
-    
+
     class Meta():
         verbose_name = 'Владелец'
         verbose_name_plural = 'Владельцы'
 
 
-class OwnerInline(admin.TabularInline):
-    model = Owner.flat.through
-    extra = 1
-    verbose_name = 'Собственник'
-    verbose_name_plural = 'Собственники'
 
     
