@@ -55,6 +55,13 @@ class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat']
     list_display = ['name', 'pure_phone']
     search_fields = ['name', 'phonenumbers']
+
+
+class OwnerInline(admin.TabularInline):
+    model = Owner.flat.through
+    extra = 1
+    verbose_name = 'Собственник'
+    verbose_name_plural = 'Собственники'
     
 
 admin.site.register(Complaint, ComplaintAdmin)
