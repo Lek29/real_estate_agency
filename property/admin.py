@@ -12,6 +12,7 @@ class OwnerInline(admin.TabularInline):
     verbose_name_plural = 'Собственники'
 
 
+@admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = [
         'town',
@@ -46,6 +47,7 @@ class FlatAdmin(admin.ModelAdmin):
     inlines = [OwnerInline]
 
 
+@admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat'] 
     list_display = ['user', 'flat', 'text']  
@@ -53,12 +55,10 @@ class ComplaintAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'text'] 
 
 
+@admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ['flat']
     list_display = ['name', 'pure_phone']
     search_fields = ['name', 'phonenumbers']
 
 
-admin.site.register(Complaint, ComplaintAdmin)
-admin.site.register(Flat, FlatAdmin)
-admin.site.register(Owner, OwnerAdmin)
