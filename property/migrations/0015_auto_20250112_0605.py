@@ -2,20 +2,23 @@
 
 from django.db import migrations
 
-def transfer_owners(apps , schema_editor):
-    Flat = apps.get_model('property','Flat')
-    Owner = apps.get_model('property','Owner')
 
-    for flat in Flat.objects.all():
+def transfer_owners(apps, schema_editor):
+    Flat = apps.get_model('property', 'Flat')
+    Owner = apps.get_model('property', 'Owner')
+
+    for flat in Flat.objects.all().iterator():
         owner, created = Owner.objects.get_or_create(
-            name = flat.owner,
-            defaults = {
+            name=flat.owner,
+            defaults={
                 'phonenumbers': flat.owners_phonenumber,
                 'pure_phone': flat.owner_pure_phone,
             }
         )
         
         owner.flat.add(flat)
+
+
 class Migration(migrations.Migration):
 
     dependencies = [

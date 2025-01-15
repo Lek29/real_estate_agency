@@ -2,16 +2,17 @@
 
 from django.db import migrations
 
+
 def link_owners_to_flat(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         owner, created = Owner.objects.get_or_create(
-            name = flat.owner,
-            defaults ={
+            name=flat.owner,
+            defaults={
                 'phonenumbers': flat.owners_phonenumber,
-                'pure_phone' : flat.owner_pure_phone,
+                'pure_phone': flat.owner_pure_phone,
             }
         )
         owner.flat.set([flat])

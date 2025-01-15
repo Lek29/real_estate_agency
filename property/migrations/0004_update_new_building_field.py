@@ -2,12 +2,14 @@
 
 from django.db import migrations
 
+
 def set_new_building(apps, schema_editor):
-    Flat =  apps.get_model('property', 'Flat')
+    Flat = apps.get_model('property', 'Flat')
     print("Обновление записей с construction_year >= 2015...")
     Flat.objects.filter(construction_year__gte=2015).update(new_building=True)
     print("Обновление записей с construction_year < 2015...")
     Flat.objects.filter(construction_year__lt=2015).update(new_building=False)
+
 
 class Migration(migrations.Migration):
 
