@@ -18,7 +18,7 @@ def normalize_phone_number(apps, schema_editor):
             flat.owner_pure_phone = normalized_number
             flat.save()
         except phonenumbers.phonenumberutil.NumberParseException:
-            flat.owner_pure_phone = ""
+            flat.owner_pure_phone = None
             flat.save()
 
 
