@@ -1,20 +1,11 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from phonenumber_field.modelfields import PhoneNumberField
-from django.contrib import admin
-
 
 User = get_user_model()
 
+
 class Flat(models.Model):
-    # owners_phonenumber = models.CharField('Номер владельца', max_length=20)
-    # owner_pure_phone = PhoneNumberField(
-    #     'Нормализованный номер владельца',
-    #     blank=True,
-    #     null=True,
-    #     region='RU',
-    # )
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
@@ -54,7 +45,7 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
-    
+
     active = models.BooleanField('Активно-ли объявление', db_index=True)
     construction_year = models.IntegerField(
         'Год постройки здания',
@@ -81,13 +72,14 @@ class Flat(models.Model):
         verbose_name='Собственники',
         blank=True,
     )
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}.)'
-    
+
     class Meta():
         verbose_name = 'Квартира'
         verbose_name_plural = 'Квартиры'
-    
+
 
 class Complaint(models.Model):
     user = models.ForeignKey(
@@ -108,10 +100,11 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f'Жалоба от {self.user} на квартиру {self.flat}'
-    
+
     class Meta:
         verbose_name = 'Жалоба'
         verbose_name_plural = 'Жалобы'
+
 
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
@@ -132,12 +125,7 @@ class Owner(models.Model):
 
     def __str__(self):
         return self.name
-    
 
     class Meta():
         verbose_name = 'Владелец'
         verbose_name_plural = 'Владельцы'
-
-
-
-    
