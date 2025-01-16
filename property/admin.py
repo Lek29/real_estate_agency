@@ -58,8 +58,4 @@ class OwnerAdmin(admin.ModelAdmin):
     list_display = ['name', 'pure_phone']
     search_fields = ['name', 'phonenumbers']
 
-    raw_id_fields = ['owned_flats']
-
-    filter_horizontal = ['owned_flats']
-
-    
+    raw_id_fields = ['flat']
