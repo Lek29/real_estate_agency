@@ -5,7 +5,7 @@ from .models import Owner
 
 
 class OwnerInline(admin.TabularInline):  
-    model = Owner.owned_flats.through  
+    model = Owner.properties.through  
     raw_id_fields = ('owner',)  
     extra = 0
 
