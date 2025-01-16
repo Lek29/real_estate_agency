@@ -31,7 +31,7 @@ def normalize_phone_numbers(apps, shema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0012_normalize_phone_numbers_fix'),
+        ('property', '0010_flat_owner_pure_phone_alter_complaint_id_and_more'),
     ]
 
     operations = [

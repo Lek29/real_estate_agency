@@ -21,7 +21,7 @@ def link_owners_to_flat(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0017_auto_20250113_0558'),
+        ('property', '0014_owner'),
     ]
 
     operations = [

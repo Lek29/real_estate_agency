@@ -1,15 +1,13 @@
 from django.contrib import admin
-
 from .models import Flat
 from .models import Complaint
 from .models import Owner
 
 
-class OwnerInline(admin.TabularInline):
-    model = Owner.flat.through
-    extra = 1
-    verbose_name = 'Собственник'
-    verbose_name_plural = 'Собственники'
+class OwnerInline(admin.TabularInline):  
+    model = Owner.owned_flats.through  
+    raw_id_fields = ('owner',)  
+    extra = 0
 
 
 @admin.register(Flat)
@@ -17,7 +15,7 @@ class FlatAdmin(admin.ModelAdmin):
     search_fields = [
         'town',
         'address',
-        'owner',
+        'owners__name',
     ]
 
     readonly_fields = [
@@ -57,8 +55,11 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
-    raw_id_fields = ['flat']
     list_display = ['name', 'pure_phone']
     search_fields = ['name', 'phonenumbers']
 
+    raw_id_fields = ['owned_flats']
 
+    filter_horizontal = ['owned_flats']
+
+    
