@@ -14,7 +14,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='flat',
             name='owner_pure_phone',
-            field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region='RU', verbose_name='Нормализованный номер владельца'),
+            field=phonenumber_field.modelfields.PhoneNumberField(
+                blank=True, max_length=128,
+                null=True, region='RU',
+                verbose_name='Нормализованный номер владельца'
+            ),
         ),
         migrations.AlterField(
             model_name='complaint',
